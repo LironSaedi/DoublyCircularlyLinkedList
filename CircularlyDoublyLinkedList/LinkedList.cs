@@ -14,26 +14,54 @@ namespace CircularlyDoublyLinkedList
             if (Head == null)
             {
                 Head = new Node<T>(value);
+                Tail = Head;
+                Head.Next = Tail;
+                Tail.Next = Head;
+                Head.Previous = Tail;
                 return;
             }
-
+            // creating the node 
             Node<T> Temp = new Node<T>(value);
 
-            if (Tail == null)
-            {
-                Tail = Head;
-            }
+
+            Temp.Next = Head;
+            Head.Previous = Temp;
+
+            Tail.Next = Temp;
+            Temp.Next = Head;
+            Head = Temp;
+                       
+
         }
 
 
-        public void AddLast()
+        public void AddLast(T value)
         {
+            if (Head == null)
+            {
+                Head = new Node<T>(value);
+                Tail = Head;
+                Head.Next = Tail;
+                Tail.Next = Head;
+                Head.Previous = Tail;
+                return;
+            }
+            // creating the node 
+            Node<T> Temp = new Node<T>(value);
 
+            Tail.Next = Temp;
+            Temp.Previous = Tail;
+
+            Temp.Next = Head;
+            Head.Previous = Tail;
+
+            Tail = Temp;
+           
         }
 
         public void AddBefore()
         {
-
+            
         }
 
         public void AddAfter()
