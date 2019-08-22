@@ -6,9 +6,9 @@ namespace CircularlyDoublyLinkedList
 {
     class LinkedList<T>
     {
-        Node<T> Head;
-        Node<T> Tail; 
-
+        public Node<T> Head;
+        Node<T> Tail;
+        int count = 0;
         public void AddFirst(T value)
         {
             if (Head == null)
@@ -30,8 +30,8 @@ namespace CircularlyDoublyLinkedList
             Tail.Next = Temp;
             Temp.Next = Head;
             Head = Temp;
-                       
 
+            count++;
         }
 
 
@@ -56,17 +56,65 @@ namespace CircularlyDoublyLinkedList
             Head.Previous = Tail;
 
             Tail = Temp;
-           
+            count++;
         }
 
-        public void AddBefore()
+        public void AddBefore(T value, Node<T> node)
         {
-            
+
+            if (Head == null)
+            {
+                Head = new Node<T>(value);
+                Tail = Head;
+                Head.Next = Tail;
+                Tail.Next = Head;
+                Head.Previous = Tail;
+                count++;
+                return;
+            }
+
+            Node<T> current = new Node<T>(value);
+
+
+            Node<T> Temp = Head;
+
+
+            for (int i = 0; i < count; i++)
+            {
+                if (Temp == node)
+                {
+                    break;
+                }
+                Temp = Head.Next;
+
+            }
+
+            current.Next = Temp;
+            current.Previous = Temp.Previous;
+            Temp.Previous.Next = current;
+            Temp.Previous = current;
+
+
+
+            count++;
         }
 
-        public void AddAfter()
+        public void AddAfter(T value, Node<T> node)
         {
+            if (Head == null)
+            {
+                Head = new Node<T>(value);
+                Tail = Head;
+                Head.Next = Tail;
+                Tail.Next = Head;
+                Head.Previous = Tail;
+                count++;
+                return;
+            }
 
+            Node<T> current = new Node<T>(value);
+
+            Node<T> Temp = Head
         }
 
         public bool RemoveFirst()
@@ -92,7 +140,7 @@ namespace CircularlyDoublyLinkedList
             }
 
             return false;
-            
+
         }
     }
 }

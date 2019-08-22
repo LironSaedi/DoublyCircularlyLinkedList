@@ -25,17 +25,31 @@ namespace CircularlyDoublyLinkedList
 
             //;
 
+            int newValue;
+          for(int i = 0; i < 10; i++)
+          {
+              newValue = gen.Next(1, 100);
+             
 
+              linkedList.AddLast(newValue);
+
+                Console.WriteLine(newValue);
+
+            }
+            
             int value;
             for (int i = 0; i < 5; i++)
             {
                 value = (i * 100);
-
-                linkedList.AddFirst(value);
-
+                
+                linkedList.AddBefore(value, linkedList.Head.Next);
+                Console.WriteLine(value);
             }
 
             ;
+            
+
+            
 
         }
     }
