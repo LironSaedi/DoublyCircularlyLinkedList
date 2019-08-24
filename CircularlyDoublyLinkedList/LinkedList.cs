@@ -71,6 +71,7 @@ namespace CircularlyDoublyLinkedList
                 Head.Previous = Tail;
                 count++;
                 return;
+
             }
 
             Node<T> current = new Node<T>(value);
@@ -95,7 +96,6 @@ namespace CircularlyDoublyLinkedList
             Temp.Previous = current;
 
 
-
             count++;
         }
 
@@ -114,12 +114,49 @@ namespace CircularlyDoublyLinkedList
 
             Node<T> current = new Node<T>(value);
 
-            Node<T> Temp = Head
+            Node<T> Temp = Head;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (Temp == node)
+                {
+                    break;
+                }
+
+                Temp = Head.Next;
+            }
+
+            current.Next = Temp.Next;
+            current.Previous = Temp;
+            Temp.Next.Previous = current;
+            Temp.Next = current;
+
+            count++;
         }
 
-        public bool RemoveFirst()
+        public bool RemoveFirst(T value)
         {
-            return false;
+            if (Head == null)
+            {
+                return false;
+            }
+
+            if (count == 1)
+            {
+                Head = null;
+
+                count--;
+                return true;
+            }
+
+            Head.Next = Head;
+
+            Head.Previous = Tail;
+
+            Tail.Next = Head;
+
+            return true;
+
         }
 
         public bool RemoveLast()
@@ -140,7 +177,6 @@ namespace CircularlyDoublyLinkedList
             }
 
             return false;
-
         }
     }
 }
