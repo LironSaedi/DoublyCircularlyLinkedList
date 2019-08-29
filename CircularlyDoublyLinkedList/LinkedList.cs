@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CircularlyDoublyLinkedList
 {
-    class LinkedList<T>
+    class LinkedList<T> where T : IComparable<T>
     {
         public Node<T> Head;
         Node<T> Tail;
@@ -134,7 +134,7 @@ namespace CircularlyDoublyLinkedList
             count++;
         }
 
-        public bool RemoveFirst(T value)
+        public bool RemoveFirst()
         {
             if (Head == null)
             {
@@ -161,12 +161,62 @@ namespace CircularlyDoublyLinkedList
 
         public bool RemoveLast()
         {
-            return false;
+
+            if (Head == null)
+            {
+                return false;
+            }
+
+
+
+            Tail.Previous = Tail;
+            Tail.Next = Head;
+            Head.Previous = Tail;
+
+            Tail = null;
+            count--;
+            return true;
+
+
+
+
+
         }
 
         public bool Remove(T value)
         {
-            return false;
+            if (Head == null)
+            {
+                return false;
+            }
+
+            Node<T> current = Head;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (current.Value.CompareTo(value) == 0)
+                {
+                    // this is the node you want to remove
+                    if (current == Head)
+                    {
+                        RemoveFirst();
+                    }
+                    if (current == Tail)
+                    {
+                        RemoveLast();
+                    }
+
+                    current.Next = null;
+                    current.Previous = null;
+                    current = null;
+                    count--;
+                    break;
+                }
+
+                current = current.Next;
+            }
+
+            return true;
         }
 
         public bool IsEmpty()
@@ -177,6 +227,13 @@ namespace CircularlyDoublyLinkedList
             }
 
             return false;
+        }
+
+
+        public int Count()
+        {
+            return count;
+            
         }
     }
 }

@@ -41,7 +41,7 @@ namespace CircularlyDoublyLinkedList
             {
                 value = (i * 100);
 
-                linkedList.AddAfter(value, linkedList.Head.Next);
+                linkedList.Remove(value);
                 Console.WriteLine(value);
             }
 
